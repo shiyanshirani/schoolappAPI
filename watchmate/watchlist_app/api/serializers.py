@@ -9,7 +9,7 @@ class WatchListSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # fields = ['id', 'name', 'description']
         # exclude = ['active']
-    
+     
     # def get_len_name(self, object):
     #     return len(object.name)
     
@@ -25,9 +25,13 @@ class WatchListSerializer(serializers.ModelSerializer):
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
     # Serializers Relations (RelatedKeyField)
-    # watchlist = WatchListSerializer(many=True, read_only=True) # nested serializers
+    watchlist = WatchListSerializer(many=True, read_only=True) # nested serializers
+
     # watchlist = serializers.StringRelatedField(many=True)
-    watchlist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # watchlist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    
+    # Provides link for every object
+    # watchlist = serializers.HyperlinkedIdentityField(many=True, read_only=True, view_name='individual-movie')
     
     class Meta:
         model = StreamPlatform
