@@ -26,7 +26,7 @@ class WatchListDetailAV(APIView):
     def get(self, request, pk):
         try:
             movie = WatchList.objects.get(pk=pk)
-        except Movie.DoesNotExist:
+        except WatchList.DoesNotExist:
             return Response({"Error": "Movie does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = WatchListSerializer(movie)
