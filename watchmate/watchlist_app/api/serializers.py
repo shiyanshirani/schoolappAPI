@@ -23,7 +23,7 @@ class WatchListSerializer(serializers.ModelSerializer):
     #         raise serializers.ValidationError('Name and description should be different')
     #     return data
 
-class StreamPlatformSerializer(serializers.ModelSerializer):
+class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
     # Serializers Relations (RelatedKeyField)
     watchlist = WatchListSerializer(many=True, read_only=True) # nested serializers
 
