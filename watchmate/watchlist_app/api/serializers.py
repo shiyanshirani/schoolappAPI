@@ -6,8 +6,6 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-
-
 class WatchListSerializer(serializers.ModelSerializer):
     # len_name = serializers.SerializerMethodField()
     reviews = ReviewSerializer(many=True, read_only=True)
@@ -44,8 +42,6 @@ class StreamPlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model = StreamPlatform
         fields = '__all__'
-
-
 
 # def name_length(value):
 #     if len(value) < 2:
