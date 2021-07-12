@@ -8,6 +8,8 @@ urlpatterns = [
     path('stream/', StreamPlatformAV.as_view(), name='stream'),
     path('stream/<int:pk>/', StreamPlatformDetailAV.as_view(), name='individual-stream'),
 
-    path('review/', ReviewList.as_view(), name='review-list'),
-    path('review/<int:pk>/', ReviewDetail.as_view(), name='review-detail'),
-]
+    path('stream/review/', ReviewList.as_view(), name='review-list'),
+
+    path('stream/review/<int:pk>/', ReviewList.as_view(), name='review-list'),
+    path('stream/<int:pk>/review/', ReviewDetail.as_view(), name='review-detail'),
+] 
