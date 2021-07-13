@@ -78,7 +78,7 @@ class WatchListDetailAV(APIView):
     def put(self, request, pk):
         try:
             movie = WatchList.objects.get(pk=pk)
-        except Movie.DoesNotExist:
+        except WatchList.DoesNotExist:
             return Response({"Error": "Movie does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = WatchListSerializer(movie, data=request.data)
@@ -108,9 +108,13 @@ class StreamPlatformAV(APIView):
 
 class StreamPlatformDetailAV(APIView):
     def get(self, request, pk):
-        platform = StreamPlatform.objects.get(pk=pk)
-        serializer = StreamPlatformSerializer(platform)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            platform = StreamPlatform.objects.get(pk=pk)
+            serializer = StreamPlatformSerializer(platform)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except StreamPlatform.DoesNotExist:
+            return Response({"Errors": "StreamPlatform Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
+
     
     def put(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
