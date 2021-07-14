@@ -126,5 +126,5 @@ class StreamPlatformDetailAV(APIView):
     
     def delete(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
-        # platform.delete()
+        platform.delete()
         # return Response({"Success": "Deleted"}, status=statuis.HTTP_200_OK)
