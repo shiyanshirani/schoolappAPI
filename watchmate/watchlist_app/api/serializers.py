@@ -6,11 +6,13 @@ from watchlist_app.models import (WatchList,
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['watchlist', ]
 
 class WatchListSerializer(serializers .ModelSerializer):
     # len_name = serializers.SerializerMethodField()
     reviews = ReviewSerializer(many=True, read_only=True)
+    # reviews = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = WatchList
