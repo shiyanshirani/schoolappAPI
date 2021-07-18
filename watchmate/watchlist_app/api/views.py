@@ -38,11 +38,6 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-
-
-
-
-
 # class ReviewDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
 #     queryset = Review.objects.all()
 #     serializer_class = ReviewSerializer
@@ -62,6 +57,8 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 
 #     def post(self, request, *args, **kwargs):
 #         return self.create(request, *args, **kwargs)
+
+
 
 class WatchListAV(APIView):
     
