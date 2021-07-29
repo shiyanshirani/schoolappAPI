@@ -136,6 +136,6 @@ class StreamPlatformDetailAV(APIView):
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
     
     def delete(self, request, pk):
-        platform = StreamPlatform.objects.get(pk=pk)
+        # platform = StreamPlatform.objects.get(pk=pk)
         platform.delete()
-        return Response({"Success": "Deleted"}, status=status.HTTP_200_OK)
+        # return Response({"Success": "Deleted"}, status=status.HTTP_200_OK)
