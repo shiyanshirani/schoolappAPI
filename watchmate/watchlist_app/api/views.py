@@ -1,18 +1,19 @@
 from watchlist_app.models import (WatchList,
-                                StreamPlatform,
-                                Review)
+                                  StreamPlatform,
+                                  Review)
 
 from .serializers import (WatchListSerializer,
-                        StreamPlatformSerializer,
-                        ReviewSerializer)
+                          StreamPlatformSerializer,
+                          ReviewSerializer)
 
-from rest_framework import status 
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 # from rest_framework import mixins
 from rest_framework import generics
+
 
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
@@ -22,6 +23,7 @@ class ReviewCreate(generics.CreateAPIView):
         movie = WatchList.objects.get(pk=pk)
 
         serializer.save(watchlist=movie)
+
 
 class ReviewList(generics.ListCreateAPIView):
     # queryset = Review.objects.all()   #overwriting queryset
@@ -34,8 +36,7 @@ class ReviewList(generics.ListCreateAPIView):
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer 
-
+    serializer_class = ReviewSerializer
 
 
 # class ReviewDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
@@ -59,9 +60,8 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 #         return self.create(request, *args, **kwargs)
 
 
-
 class WatchListAV(APIView):
-    
+
     def get(self, request):
         movies = WatchList.objects.all()
         serializer = WatchListSerializer(movies, many=True)
@@ -74,7 +74,8 @@ class WatchListAV(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
-    
+
+
 class WatchListDetailAV(APIView):
 
     def get(self, request, pk):
@@ -85,7 +86,7 @@ class WatchListDetailAV(APIView):
 
         serializer = WatchListSerializer(movie)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     def put(self, request, pk):
         try:
             movie = WatchList.objects.get(pk=pk)
@@ -97,12 +98,13 @@ class WatchListDetailAV(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND )
-        
+            return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
     def delete(self, request, pk):
         movie = WatchList.objects.get(pk=pk)
         movie.delete()
         return Response({'Success': 'Deleted'})
+
 
 class StreamPlatformAV(APIView):
     def get(self, request):
@@ -113,9 +115,10 @@ class StreamPlatformAV(APIView):
     def post(self, request):
         serializer = StreamPlatformSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save() 
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
 
 class StreamPlatformDetailAV(APIView):
     def get(self, request, pk):
@@ -126,7 +129,6 @@ class StreamPlatformDetailAV(APIView):
         except StreamPlatform.DoesNotExist:
             return Response({"Errors": "StreamPlatform Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    
     def put(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
         serializer = StreamPlatformSerializer(platform, data=request.data)
@@ -134,8 +136,8 @@ class StreamPlatformDetailAV(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
-    
+
     def delete(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
         platform.delete()
-        return Response({"Success": "Deleted"}, status=status.HTTP_200_OK)
+        # return Response({"Success": "Deleted"}, status=status.HTTP_200_OK)
