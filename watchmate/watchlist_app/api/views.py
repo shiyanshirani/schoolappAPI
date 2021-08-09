@@ -121,6 +121,7 @@ class StreamPlatformAV(APIView):
 
 
 class StreamPlatformDetailAV(APIView):
+    # Get request using pk (fetching particular database id)
     def get(self, request, pk):
         try:
             platform = StreamPlatform.objects.get(pk=pk)
