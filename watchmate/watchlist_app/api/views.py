@@ -128,7 +128,8 @@ class StreamPlatformDetailAV(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except StreamPlatform.DoesNotExist:
             return Response({"Errors": "StreamPlatform Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
-
+            
+    # Update in database with pk
     def put(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
         serializer = StreamPlatformSerializer(platform, data=request.data)
