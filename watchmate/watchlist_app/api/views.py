@@ -124,9 +124,9 @@ class StreamPlatformDetailAV(APIView):
     # Get request using pk (fetching particular database id)
     def get(self, request, pk):
         try:
-            platform = StreamPlatform.objects.get(pk=pk)
-            serializer = StreamPlatformSerializer(platform)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            # platform = StreamPlatform.objects.get(pk=pk)
+            # serializer = StreamPlatformSerializer(platform)
+            # return Response(serializer.data, status=status.HTTP_200_OK)
         except StreamPlatform.DoesNotExist:
             return Response({"Errors": "StreamPlatform Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
             
