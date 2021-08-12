@@ -106,18 +106,18 @@ class WatchListDetailAV(APIView):
         return Response({'Success': 'Deleted'})
 
 
-class StreamPlatformAV(APIView):
-    def get(self, request):
-        platforms = StreamPlatform.objects.all()
-        serializers = StreamPlatformSerializer(platforms, many=True)
-        return Response(serializers.data, status=status.HTTP_200_OK)
+# class StreamPlatformAV(APIView):
+#     def get(self, request):
+#         platforms = StreamPlatform.objects.all()
+#         serializers = StreamPlatformSerializer(platforms, many=True)
+#         return Response(serializers.data, status=status.HTTP_200_OK)
 
-    def post(self, request):
-        serializer = StreamPlatformSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+#     def post(self, request):
+#         serializer = StreamPlatformSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 
 
 # class StreamPlatformDetailAV(APIView):
